@@ -45,16 +45,16 @@ install(
 
 include_directories(include)
 
-add_executable(lqr_controller src/LQR.cpp
-                              src/KinematicModel.cpp
+add_executable(lqr_controller src/lqr.cpp
+                              src/kinematic_model.cpp
                               src/main.cpp
                               src/Reference_path.cpp)
 
                               
 target_link_libraries(lqr_controller PUBLIC m PRIVATE --coverage PUBLIC matplotlib_cpp)
 
-add_executable(lqr_pid_controller src/LQR.cpp
-                              src/KinematicModel.cpp
+add_executable(lqr_pid_controller src/lqr.cpp
+                              src/kinematic_model.cpp
                               src/main_pid.cpp
                               src/Reference_path.cpp
                               src/pid_control.cpp)

@@ -1,10 +1,5 @@
-/*
- * @Author: wangdezhao
- * @Date: 2022-04-08 09:59:50
- * @LastEditTime: 2022-04-16 15:19:58
- * @FilePath: /osqp_eigen/include/matplotlibcpp.h
- * @Copyright:
- */
+
+
 #pragma once
 
 // Python headers must be included before any system headers, since
@@ -54,69 +49,71 @@
 #define PyString_FromString PyUnicode_FromString
 #endif
 
-namespace matplotlibcpp {
-namespace detail {
+namespace matplotlibcpp 
+{
+namespace detail 
+{
 
-static std::string s_backend;
+    static std::string s_backend;
 
-struct _interpreter {
-  PyObject* s_python_function_arrow;
-  PyObject* s_python_function_show;
-  PyObject* s_python_function_close;
-  PyObject* s_python_function_draw;
-  PyObject* s_python_function_pause;
-  PyObject* s_python_function_save;
-  PyObject* s_python_function_figure;
-  PyObject* s_python_function_fignum_exists;
-  PyObject* s_python_function_plot;
-  PyObject* s_python_function_quiver;
-  PyObject* s_python_function_contour;
-  PyObject* s_python_function_semilogx;
-  PyObject* s_python_function_semilogy;
-  PyObject* s_python_function_loglog;
-  PyObject* s_python_function_fill;
-  PyObject* s_python_function_fill_between;
-  PyObject* s_python_function_hist;
-  PyObject* s_python_function_imshow;
-  PyObject* s_python_function_scatter;
-  PyObject* s_python_function_boxplot;
-  PyObject* s_python_function_subplot;
-  PyObject* s_python_function_subplot2grid;
-  PyObject* s_python_function_legend;
-  PyObject* s_python_function_xlim;
-  PyObject* s_python_function_ion;
-  PyObject* s_python_function_ginput;
-  PyObject* s_python_function_ylim;
-  PyObject* s_python_function_title;
-  PyObject* s_python_function_axis;
-  PyObject* s_python_function_axhline;
-  PyObject* s_python_function_axvline;
-  PyObject* s_python_function_axvspan;
-  PyObject* s_python_function_xlabel;
-  PyObject* s_python_function_ylabel;
-  PyObject* s_python_function_gca;
-  PyObject* s_python_function_xticks;
-  PyObject* s_python_function_yticks;
-  PyObject* s_python_function_margins;
-  PyObject* s_python_function_tick_params;
-  PyObject* s_python_function_grid;
-  PyObject* s_python_function_cla;
-  PyObject* s_python_function_clf;
-  PyObject* s_python_function_errorbar;
-  PyObject* s_python_function_annotate;
-  PyObject* s_python_function_tight_layout;
-  PyObject* s_python_colormap;
-  PyObject* s_python_empty_tuple;
-  PyObject* s_python_function_stem;
-  PyObject* s_python_function_xkcd;
-  PyObject* s_python_function_text;
-  PyObject* s_python_function_suptitle;
-  PyObject* s_python_function_bar;
-  PyObject* s_python_function_barh;
-  PyObject* s_python_function_colorbar;
-  PyObject* s_python_function_subplots_adjust;
-  PyObject* s_python_function_rcparams;
-  PyObject* s_python_function_spy;
+    struct _interpreter {
+    PyObject* s_python_function_arrow;
+    PyObject* s_python_function_show;
+    PyObject* s_python_function_close;
+    PyObject* s_python_function_draw;
+    PyObject* s_python_function_pause;
+    PyObject* s_python_function_save;
+    PyObject* s_python_function_figure;
+    PyObject* s_python_function_fignum_exists;
+    PyObject* s_python_function_plot;
+    PyObject* s_python_function_quiver;
+    PyObject* s_python_function_contour;
+    PyObject* s_python_function_semilogx;
+    PyObject* s_python_function_semilogy;
+    PyObject* s_python_function_loglog;
+    PyObject* s_python_function_fill;
+    PyObject* s_python_function_fill_between;
+    PyObject* s_python_function_hist;
+    PyObject* s_python_function_imshow;
+    PyObject* s_python_function_scatter;
+    PyObject* s_python_function_boxplot;
+    PyObject* s_python_function_subplot;
+    PyObject* s_python_function_subplot2grid;
+    PyObject* s_python_function_legend;
+    PyObject* s_python_function_xlim;
+    PyObject* s_python_function_ion;
+    PyObject* s_python_function_ginput;
+    PyObject* s_python_function_ylim;
+    PyObject* s_python_function_title;
+    PyObject* s_python_function_axis;
+    PyObject* s_python_function_axhline;
+    PyObject* s_python_function_axvline;
+    PyObject* s_python_function_axvspan;
+    PyObject* s_python_function_xlabel;
+    PyObject* s_python_function_ylabel;
+    PyObject* s_python_function_gca;
+    PyObject* s_python_function_xticks;
+    PyObject* s_python_function_yticks;
+    PyObject* s_python_function_margins;
+    PyObject* s_python_function_tick_params;
+    PyObject* s_python_function_grid;
+    PyObject* s_python_function_cla;
+    PyObject* s_python_function_clf;
+    PyObject* s_python_function_errorbar;
+    PyObject* s_python_function_annotate;
+    PyObject* s_python_function_tight_layout;
+    PyObject* s_python_colormap;
+    PyObject* s_python_empty_tuple;
+    PyObject* s_python_function_stem;
+    PyObject* s_python_function_xkcd;
+    PyObject* s_python_function_text;
+    PyObject* s_python_function_suptitle;
+    PyObject* s_python_function_bar;
+    PyObject* s_python_function_barh;
+    PyObject* s_python_function_colorbar;
+    PyObject* s_python_function_subplots_adjust;
+    PyObject* s_python_function_rcparams;
+    PyObject* s_python_function_spy;
 
   /* For now, _interpreter is implemented as a singleton since its currently not
      possible to have multiple independent embedded python interpreters without
@@ -131,9 +128,9 @@ struct _interpreter {
        2: https://github.com/lava/matplotlib-cpp/pull/202#issue-436220256
      */
 
-  static _interpreter& get() { return interkeeper(false); }
+    static _interpreter& get() { return interkeeper(false); }
 
-  static _interpreter& kill() { return interkeeper(true); }
+    static _interpreter& kill() { return interkeeper(true); }
 
   // Stores the actual singleton object referenced by `get()` and `kill()`.
   static _interpreter& interkeeper(bool should_kill) {

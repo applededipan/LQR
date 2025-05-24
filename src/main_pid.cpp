@@ -1,6 +1,6 @@
-#include "LQR.h"
+#include "lqr.h"
 #include "Reference_path.h"
-#include "KinematicModel.h"
+#include "kinematic_model.h"
 #include "matplotlibcpp.h"
 #include "pid_control.h"
 
@@ -41,14 +41,14 @@ int main(){
 
     for(int i = 0;i<350;i++){
         plt::clf();
-        robot_state = robot.getState();// {x , y , psi , v};
+        robot_state = robot.get_state();// {x , y , psi , v};
         vector<double>one_trial = referencePath.calcTrackError(robot_state);
         double k = one_trial[1];
         double ref_yaw = one_trial[2];// 预瞄点曲率
         double s0 = one_trial[3];  // min_distance_index
 
         double ref_delta = atan2(L*k,1);  // 求出参考轨迹上的预瞄点的航向角
-        vector<MatrixXd>state_space = robot.stateSpace(ref_delta,ref_yaw);   //{A,B} 矩阵
+        vector<MatrixXd>state_space = robot.state_space(ref_delta,ref_yaw);   //{A,B} 矩阵
 
 
      // 传入机器人状态、参考轨迹、min_index, A , B , Q, R     求解得到前轮转角的增量
@@ -56,7 +56,7 @@ int main(){
         delta += ref_delta;
         
         double a = PID.calOutput(robot.v);
-        robot.updateState(a,delta);   // 加速度由pid控制器调节
+        robot.update_state(a,delta);   // 加速度由pid控制器调节
 
         cout<<" speed :"<< robot.v<<" m/s "<<endl;
 
