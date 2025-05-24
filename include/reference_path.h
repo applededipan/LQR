@@ -4,7 +4,7 @@
  * @Author      : apple
  * @Email       : sunjundedipan@163.com
  * @Date        : Do not edit
- * @LastEditTime: 2025-05-24 14:31:43
+ * @LastEditTime: 2025-05-24 15:46:56
  **************************************************************************/
 
 #pragma once
@@ -34,12 +34,12 @@ class MyReference_path
 {
 public:
     MyReference_path();
-    vector<double> calcTrackError( vector<double> robot_state);
-    double normalizeAngle(double angle);
+    vector<double> calc_track_error(vector<double> robot_state);
+    double normalize_angle(double angle);
 
 public:
     vector<vector<double>> refer_path; // refer_path包括4维：位置x, 位置y， 轨迹点的切线方向, 曲率k
-    vector<double> refer_x,refer_y;
+    vector<double> refer_x, refer_y;
 };
 
 

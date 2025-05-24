@@ -50,7 +50,7 @@ MyReference_path::MyReference_path()
 
 
 // ********************************计算跟踪误差 **************************************** //
-vector<double> MyReference_path::calcTrackError( vector<double>robot_state)
+vector<double> MyReference_path::calc_track_error(vector<double>robot_state)
 {   //robot_state : 1 *2 (x , y)
     double x = robot_state[0];
     double y = robot_state[1];
@@ -69,7 +69,7 @@ vector<double> MyReference_path::calcTrackError( vector<double>robot_state)
 
     double yaw = refer_path[min_index][2];
     double k   = refer_path[min_index][3];
-    double angle = normalizeAngle(yaw - atan2(d_y[min_index], d_x[min_index]));
+    double angle = normalize_angle(yaw - atan2(d_y[min_index], d_x[min_index]));
     double error = d[min_index];
     if (angle < 0) error *= -1;    //  需要判断 车辆/机器人 当前在参考轨迹的左边还是右边   error 有正负号  ------> 负代表在轨迹左边 ， 正表示在轨迹右边
 
@@ -77,7 +77,7 @@ vector<double> MyReference_path::calcTrackError( vector<double>robot_state)
 }
 
 
-double MyReference_path::normalizeAngle(double angle)
+double MyReference_path::normalize_angle(double angle)
 {
     while (angle > PI) {
         angle -= 2*PI;

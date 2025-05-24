@@ -1,9 +1,9 @@
 /**************************************************************************
- * @Description : 
+ * @Description : LQR的核心是最小化代价函数:J = \sum (X^T Q X + u^T R u), 通过反馈控制 u = -KX 使系统稳定 
  * @Author      : apple
  * @Email       : sunjundedipan@163.com
  * @Date        : Do not edit
- * @LastEditTime: 2025-05-24 14:53:16
+ * @LastEditTime: 2025-05-24 15:48:43
  **************************************************************************/
 
 #pragma once
@@ -32,7 +32,7 @@ public:
     // 参数 A 和 B 分别代表系统的状态矩阵和控制矩阵。
     // 参数 Q 和 R 分别代表状态权重矩阵和控制权重矩阵。
     // 返回值是解得的Riccati矩阵 P
-    MatrixXd calRicatti(MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
-    double lqrControl(vector<double>robot_state, vector<vector<double>>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
+    MatrixXd cal_ricatti(MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
+    double lqr_control(vector<double>robot_state, vector<vector<double>>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
 };
 
