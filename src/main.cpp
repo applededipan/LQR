@@ -1,5 +1,5 @@
 #include "lqr.h"
-#include "Reference_path.h"
+#include "reference_path.h"
 #include "kinematic_model.h"
 #include "matplotlibcpp.h"
 

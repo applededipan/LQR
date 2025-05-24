@@ -48,7 +48,7 @@ include_directories(include)
 add_executable(lqr_controller src/lqr.cpp
                               src/kinematic_model.cpp
                               src/main.cpp
-                              src/Reference_path.cpp)
+                              src/reference_path.cpp)
 
                               
 target_link_libraries(lqr_controller PUBLIC m PRIVATE --coverage PUBLIC matplotlib_cpp)
@@ -56,6 +56,6 @@ target_link_libraries(lqr_controller PUBLIC m PRIVATE --coverage PUBLIC matplotl
 add_executable(lqr_pid_controller src/lqr.cpp
                               src/kinematic_model.cpp
                               src/main_pid.cpp
-                              src/Reference_path.cpp
+                              src/reference_path.cpp
                               src/pid_control.cpp)
 target_link_libraries(lqr_pid_controller PUBLIC m PRIVATE --coverage PUBLIC matplotlib_cpp)

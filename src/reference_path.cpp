@@ -1,14 +1,14 @@
 
 
 
-#include "Reference_path.h"
+#include "reference_path.h"
 
 
 
-//************************ 构造函数 ， 求出参考轨迹点上的曲率等信息 ******************************************//
+//************************ 构造函数， 求出参考轨迹点上的曲率等信息 ******************************************//
 MyReference_path::MyReference_path()
 {
-    refer_path = vector<vector<double>> (1000,vector<double>(4));// 1000个点 ， 每个点有x、y、偏航角yaw和曲率（curvature）
+    refer_path = vector<vector<double>> (1000, vector<double>(4));// 1000个点 ， 每个点有x、y、偏航角yaw和曲率（curvature）
 
     //生成参考轨迹
 
@@ -22,22 +22,22 @@ MyReference_path::MyReference_path()
     double dx, dy, ddx, ddy;
     for (int i = 0; i < refer_path.size(); i++) {
         if (i == 0) {
-             dx  = refer_path[i+1][0] - refer_path[i][0];
-             dy  = refer_path[i+1][1] - refer_path[i][1];
-             ddx = refer_path[2][0] + refer_path[0][0] - 2*refer_path[1][0];
-             ddy = refer_path[2][1] + refer_path[0][1] - 2*refer_path[1][1];    //在计算一阶和二阶导数时，对于路径的起点和终点，使用特殊的差分公式来处理边界条件。
+            dx  = refer_path[i+1][0] - refer_path[i][0];
+            dy  = refer_path[i+1][1] - refer_path[i][1];
+            ddx = refer_path[2][0] + refer_path[0][0] - 2*refer_path[1][0];
+            ddy = refer_path[2][1] + refer_path[0][1] - 2*refer_path[1][1];    //在计算一阶和二阶导数时，对于路径的起点和终点，使用特殊的差分公式来处理边界条件。
         
         } else if (i == refer_path.size()-1) {
-             dx  = refer_path[i][0] - refer_path[i-1][0];
-             dy  = refer_path[i][1] - refer_path[i-1][1];
-             ddx = refer_path[i][0] + refer_path[i-2][0] - 2*refer_path[i-1][0];
-             ddy = refer_path[i][1] + refer_path[i-2][1] - 2*refer_path[i-1][1];
+            dx  = refer_path[i][0] - refer_path[i-1][0];
+            dy  = refer_path[i][1] - refer_path[i-1][1];
+            ddx = refer_path[i][0] + refer_path[i-2][0] - 2*refer_path[i-1][0];
+            ddy = refer_path[i][1] + refer_path[i-2][1] - 2*refer_path[i-1][1];
         
         } else {
-             dx  = refer_path[i+1][0] - refer_path[i][0]; // 下一个点减当前点 dx
-             dy  = refer_path[i+1][1] - refer_path[i][1]; // 下一个点减当前点 dy
-             ddx = refer_path[i+1][0] + refer_path[i-1][0] - 2*refer_path[i][0];    // 上一个点+下一个点 - 2*当前点    ddx
-             ddy = refer_path[i+1][1] + refer_path[i-1][1] - 2*refer_path[i][1];    // 上一个点+下一个点 - 2*当前点    ddy
+            dx  = refer_path[i+1][0] - refer_path[i][0]; // 下一个点减当前点 dx
+            dy  = refer_path[i+1][1] - refer_path[i][1]; // 下一个点减当前点 dy
+            ddx = refer_path[i+1][0] + refer_path[i-1][0] - 2*refer_path[i][0];    // 上一个点+下一个点 - 2*当前点    ddx
+            ddy = refer_path[i+1][1] + refer_path[i-1][1] - 2*refer_path[i][1];    // 上一个点+下一个点 - 2*当前点    ddy
         }
 
         refer_path[i][2] = atan2(dy, dx);//偏航角 yaw

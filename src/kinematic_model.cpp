@@ -3,7 +3,7 @@
  * @Author      : apple
  * @Email       : sunjundedipan@163.com
  * @Date        : Do not edit
- * @LastEditTime: 2025-05-24 14:50:44
+ * @LastEditTime: 2025-05-24 15:01:31
  **************************************************************************/
 
 
@@ -31,8 +31,8 @@ KinematicModel::KinematicModel(double x, double y, double psi, double v, double 
  */
 void KinematicModel::update_state(double accel, double delta_f)
 {
-    x = x + v* cos(psi)*dt;
-    y = y + v* sin(psi)*dt;
+    x = x + v * cos(psi)*dt;
+    y = y + v * sin(psi)*dt;
     psi = psi + v / L * tan(delta_f)*dt;
 
     v = v + accel*dt;
@@ -63,6 +63,6 @@ vector<MatrixXd> KinematicModel::state_space(double ref_delta , double ref_yaw)
     B << dt*cos(ref_yaw), 0,
          dt*sin(ref_yaw), 0,
          dt*tan(ref_delta)/L, v*dt/(L*cos(ref_delta)*cos(ref_delta));
-         
+
     return {A, B};
 }
