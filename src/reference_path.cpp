@@ -6,17 +6,21 @@
 
 
 //************************ 构造函数， 求出参考轨迹点上的曲率等信息 ******************************************//
-MyReference_path::MyReference_path()
+ReferencePath::ReferencePath()
 {
     refer_path = vector<vector<double>> (1000, vector<double>(4));// 1000个点 ， 每个点有x、y、偏航角yaw和曲率（curvature）
 
-    //生成参考轨迹
-
-    for (int i = 0;i<1000;i++) {
+    // 生成参考轨迹, 1000个点
+    for (int i = 0; i < 1000; i++) {
         refer_path[i][0] = 0.1*i; // x坐标
         refer_path[i][1] = 2 * sin(refer_path[i][0] / 3.0) + 2.5 * cos(refer_path[i][0] / 2.0);  //y坐标
         refer_x.push_back(refer_path[i][0]); // 1000 * 1
         refer_y.push_back(refer_path[i][1]); // 1000 * 1
+
+        way_point_t point;
+        point.x = 0.1*i;    // x坐标
+        point.y = 2 * sin(refer_path[i][0] / 3.0) + 2.5 * cos(refer_path[i][0] / 2.0);  // y坐标
+        path.push_back(point);
     }
 
     double dx, dy, ddx, ddy;
@@ -50,7 +54,7 @@ MyReference_path::MyReference_path()
 
 
 // ********************************计算跟踪误差 **************************************** //
-vector<double> MyReference_path::calc_track_error(vector<double>robot_state)
+vector<double> ReferencePath::calc_track_error(vector<double>robot_state)
 {   //robot_state : 1 *2 (x , y)
     double x = robot_state[0];
     double y = robot_state[1];
@@ -77,14 +81,14 @@ vector<double> MyReference_path::calc_track_error(vector<double>robot_state)
 }
 
 
-double MyReference_path::normalize_angle(double angle)
+double ReferencePath::normalize_angle(double angle)
 {
-    while (angle > PI) {
-        angle -= 2*PI;
+    while (angle > M_PI) {
+        angle -= 2*M_PI;
     }
 
-    while (angle < -PI) {
-        angle += 2*PI;
+    while (angle < -M_PI) {
+        angle += 2*M_PI;
     }
 
     return angle;

@@ -28,7 +28,7 @@ int main()
 
     // 保存机器人移动过程中的轨迹
     vector<double>x_, y_;
-    MyReference_path reference_path;
+    ReferencePath reference_path;
     KinematicModel   robot(x_0, y_0, psi_0, v, L, dt);
 
     LQRControl robot_motion_lqr(N);//求解Riccati矩阵 P 时 迭代N次
