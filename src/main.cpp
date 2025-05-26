@@ -49,7 +49,7 @@ int main()
 
 
      // 传入机器人状态、参考轨迹、min_index, A , B , Q, R     求解得到前轮转角的增量
-        double delta = robot_motion_lqr.lqr_control(robot_state, reference_path.refer_path, s0, state_space[0], state_space[1], Q, R);// 前轮转角
+        double delta = robot_motion_lqr.lqr_control(robot_state, reference_path.path, s0, state_space[0], state_space[1], Q, R);// 前轮转角
         delta += ref_delta;
 
         robot.update_state(0, delta);   // 加速度设为0，恒速

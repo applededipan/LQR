@@ -12,6 +12,8 @@
 #include<vector>
 #include<Eigen/Dense>
 
+#include "reference_path.h"
+
 using namespace std;
 using namespace Eigen;
 
@@ -33,6 +35,6 @@ public:
     // 参数 Q 和 R 分别代表状态权重矩阵和控制权重矩阵。
     // 返回值是解得的Riccati矩阵 P
     MatrixXd cal_ricatti(MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
-    double lqr_control(vector<double>robot_state, vector<vector<double>>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
+    double lqr_control(vector<double>robot_state, vector<way_point_t>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R);
 };
 

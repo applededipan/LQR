@@ -3,11 +3,12 @@
  * @Author      : apple
  * @Email       : sunjundedipan@163.com
  * @Date        : Do not edit
- * @LastEditTime: 2025-05-24 15:35:37
+ * @LastEditTime: 2025-05-26 11:39:40
  **************************************************************************/
 
 
 #include "lqr.h"
+
 #include<cmath>
 
 
@@ -30,7 +31,7 @@ MatrixXd LQRControl::cal_ricatti(MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R)
         P_new = Q + A.transpose() * P_old * A - A.transpose() * P_old * B * (R + B.transpose() * P_old * B).inverse() * B.transpose() * P_old * A;
 
         if ((P_new-P_old).maxCoeff() < EPS && (P_old-P_new).maxCoeff() < EPS) break;
-        P_old= P_new;
+        P_old = P_new;
     }
 
     return P_new;
@@ -50,13 +51,13 @@ MatrixXd LQRControl::cal_ricatti(MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R)
  * @param R
  * @return
 */
-double LQRControl::lqr_control(vector<double>robot_state, vector<vector<double>>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R)
+double LQRControl::lqr_control(vector<double>robot_state, vector<way_point_t>refer_path, double s0, MatrixXd A, MatrixXd B, MatrixXd Q, MatrixXd R)
 {
     MatrixXd X(3, 1);
     // X = [x_curr - x_ref, y_curr - y_ref, yaw_curr - yaw_ref]^T
-    X << robot_state[0] - refer_path[s0][0],
-         robot_state[1] - refer_path[s0][1],
-         robot_state[2] - refer_path[s0][2]; //  x是当前位置和预瞄点的偏差  x,y,yaw三个偏差
+    X << robot_state[0] - refer_path.at(s0).x,
+         robot_state[1] - refer_path.at(s0).y,
+         robot_state[2] - refer_path.at(s0).yaw; //  x是当前位置和预瞄点的偏差  x,y,yaw三个偏差
 
     MatrixXd P = cal_ricatti(A, B, Q, R);     //   3*3  黎卡提方程迭代求解P函数
 
